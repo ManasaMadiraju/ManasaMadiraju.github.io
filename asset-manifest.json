@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.58a0c615.css",
-    "main.js": "/static/js/main.af201513.js",
-    "static/media/ManasaMadirajuPhoto.jpg": "/static/media/ManasaMadirajuPhoto.a3d4801ef818b54af00d.jpg",
-    "index.html": "/index.html",
-    "main.58a0c615.css.map": "/static/css/main.58a0c615.css.map",
-    "main.af201513.js.map": "/static/js/main.af201513.js.map"
+    "main.css": "/manasamadiraju.github.io/static/css/main.58a0c615.css",
+    "main.js": "/manasamadiraju.github.io/static/js/main.a9465fb3.js",
+    "static/media/ManasaMadirajuPhoto.jpg": "/manasamadiraju.github.io/static/media/ManasaMadirajuPhoto.a3d4801ef818b54af00d.jpg",
+    "index.html": "/manasamadiraju.github.io/index.html",
+    "main.58a0c615.css.map": "/manasamadiraju.github.io/static/css/main.58a0c615.css.map",
+    "main.a9465fb3.js.map": "/manasamadiraju.github.io/static/js/main.a9465fb3.js.map"
   },
   "entrypoints": [
     "static/css/main.58a0c615.css",
-    "static/js/main.af201513.js"
+    "static/js/main.a9465fb3.js"
   ]
 }
