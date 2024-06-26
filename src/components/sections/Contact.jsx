@@ -131,10 +131,10 @@ const Contact = () => {
     e.preventDefault();
     emailjs
       .sendForm(
-        "service_tox7kqs",
-        "template_nv7k7mj",
+        "service_b812igm",
+        "template_4rdui79",
         form.current,
-        "SybVGsYS52j2TfLbi"
+        "NCTQBaaILwDlbgmH5"
       )
       .then(
         (result) => {
