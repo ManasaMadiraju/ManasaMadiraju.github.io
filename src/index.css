@@ -39,3 +39,24 @@ body {
 ::-webkit-backdrop-filter {
   blur: 3px saturate(106%);
 }
+
+
+/* src/components/Contact.css or global CSS file */
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.Toastify__toast--success {
+  background-color: #f0f8f0;
+}
+
+.Toastify__toast--error {
+  background-color: #f8d7da;
+}
+

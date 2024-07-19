@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div`
   display: flex;
@@ -33,7 +37,7 @@ const Title = styled.div`
   text-align: center;
   font-weight: 600;
   margin-top: 20px;
-  color: ${({ theme }) => theme.text_primary};
+  color: white;
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
@@ -44,12 +48,13 @@ const Desc = styled.div`
   font-size: 18px;
   text-align: center;
   max-width: 600px;
-  color: ${({ theme }) => theme.text_secondary};
+  color: #666;
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 16px;
   }
 `;
+
 const ContactForm = styled.form`
   width: 95%;
   max-width: 600px;
@@ -63,86 +68,91 @@ const ContactForm = styled.form`
   margin-top: 28px;
   gap: 12px;
 `;
+
 const ContactTitle = styled.div`
   font-size: 28px;
   margin-bottom: 6px;
   font-weight: 600;
-  color: ${({ theme }) => theme.text_primary};
+  color: #fff;
 `;
+
 const ContactInput = styled.input`
   flex: 1;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary + 50};
+  border: 1px solid #ddd;
   outline: none;
   font-size: 18px;
-  color: ${({ theme }) => theme.text_primary};
+  color: #fff;
   border-radius: 12px;
   padding: 12px 16px;
   &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
+    border: 1px solid #007bff;
   }
 `;
+
 const ContactInputMessage = styled.textarea`
   flex: 1;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary + 50};
+  border: 1px solid #ddd;
   outline: none;
   font-size: 18px;
-  color: ${({ theme }) => theme.text_primary};
+  color: #fff;
   border-radius: 12px;
   padding: 12px 16px;
   &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
+    border: 1px solid #007bff;
   }
 `;
+
 const ContactButton = styled.input`
   width: 100%;
   text-decoration: none;
   text-align: center;
-  background: hsla(271, 100%, 50%, 1);
-  background: linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  background: -moz-linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
+  background: linear-gradient(225deg, #6a1b9a 0%, #ab47bc 100%);
   padding: 13px 16px;
   margin-top: 2px;
   border-radius: 12px;
   border: none;
-  color: ${({ theme }) => theme.text_primary};
+  color: #fff;
   font-size: 18px;
   font-weight: 600;
 `;
 
-const Contact = () => {
+const notifySuccess = () => {
+  toast.success(
+    <div>
+      <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '8px', color: '#4caf50' }} />
+      Message sent
+    </div>
+  );
+};
+
+const notifyError = () => {
+  toast.error(
+    <div>
+      <FontAwesomeIcon icon={faExclamationCircle} style={{ marginRight: '8px', color: '#f44336' }} />
+      Failed to send message
+    </div>
+  );
+};
+
+export const Contact = () => {
   const form = useRef();
 
-  const handleSubmit = (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
+
     emailjs
-      .sendForm(
-        "service_b812igm",
-        "template_4rdui79",
-        form.current,
-        "NCTQBaaILwDlbgmH5"
-      )
+      .sendForm('service_qnbvlzd', 'template_j5ze414', form.current, {
+        publicKey: 'SYXX_dpqLj4MPvhkH',
+      })
       .then(
-        (result) => {
-          alert("Message Sent");
-          form.current.resut();
+        () => {
+          notifySuccess();
+          e.target.reset();
         },
         (error) => {
-          alert(error);
+          notifyError();
         }
       );
   };
@@ -151,18 +161,16 @@ const Contact = () => {
     <Container>
       <Wrapper>
         <Title>Contact</Title>
-        <Desc>
-          Feel free to reach out to me for any questions or opportunities!
-        </Desc>
-        <ContactForm onSubmit={handleSubmit}>
+        <Desc>Feel free to reach out to me for any questions or opportunities!</Desc>
+        <ContactForm ref={form} onSubmit={sendEmail}>
           <ContactTitle>Email Me 🚀</ContactTitle>
-          <ContactInput placeholder="Your Email" name="from_email" />
-          <ContactInput placeholder="Your Name" name="from_name" />
-          <ContactInput placeholder="Subject" name="subject" />
-          <ContactInputMessage placeholder="Message" name="message" rows={4} />
+          <ContactInput placeholder="Your Email" name="user_email" />
+          <ContactInput placeholder="Your Name" name="user_name" />
+          <ContactInputMessage placeholder="Message" name="message" />
           <ContactButton type="submit" value="Send" />
         </ContactForm>
       </Wrapper>
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} />
     </Container>
   );
 };
