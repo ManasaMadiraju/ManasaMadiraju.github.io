@@ -252,7 +252,6 @@ const Hero = () => {
             </HeroLeftContainer>
             <HeroRightContainer>
               <motion.div {...headContentAnimation}/>
-              </motion.div>
             </HeroRightContainer>
           </HeroInnerContainer>
         </motion.div>
